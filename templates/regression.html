@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center mb-4"><i class="fas fa-chart-line"></i> Linear Regression Analysis</h2>
+    
+    {% if not has_data %}
+    <div class="alert alert-warning text-center">
+        <i class="fas fa-exclamation-triangle"></i> {{ error or "No data available" }}
+        <br><a href="/collecte" class="btn btn-primary mt-3">Add Data</a>
+    </div>
+    {% else %}
+    
+    <!-- Key Statistics -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card bg-success text-white text-center">
+                <div class="card-body">
+                    <h5>📐 Coefficient</h5>
+                    <h3>{{ "%.2f"|format(stats.coefficient) }} kg/ha</h3>
+                    <small>Production per hectare</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-info text-white text-center">
+                <div class="card-body">
+                    <h5>🎯 R² Score</h5>
+                    <h3>{{ "%.3f"|format(stats.r2) }}</h3>
+                    <small>Model accuracy (0-1)</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-warning text-white text-center">
+                <div class="card-body">
+                    <h5>📊 Formula</h5>
+                    <h6>Production = {{ "%.2f"|format(stats.coefficient) }} × Area + {{ "%.0f"|format(stats.intercept) }}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Graph 1: Simple Linear Regression -->
+    <div class="card shadow mb-4">
+        <div class="card-header bg-success text-white">
+            <i class="fas fa-chart-line"></i> 1. Simple Linear Regression: Area → Production
+        </div>
+        <div class="card-body">
+            <div id="graph1"></div>
+            <div class="alert alert-info mt-3">
+                <strong>📖 Interpretation:</strong> Each additional hectare increases production by 
+                <strong>{{ "%.2f"|format(stats.coefficient) }} kg</strong> on average.
+            </div>
+        </div>
+    </div>
+    
+    <!-- Graph 2: Correlation Matrix -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow mb-4">
+                <div class="card-header bg-primary text-white">
+                    <i class="fas fa-chart-line"></i> 2. Correlation Matrix
+                </div>
+                <div class="card-body text-center">
+                    <div id="graph2"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Graph 3: Production by Region -->
+        <div class="col-md-6">
+            <div class="card shadow mb-4">
+                <div class="card-header bg-info text-white">
+                    <i class="fas fa-chart-bar"></i> 3. Production by Region
+                </div>
+                <div class="card-body">
+                    <div id="graph3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Graph 4: Yield Distribution -->
+    <div class="card shadow mb-4">
+        <div class="card-header bg-warning text-white">
+            <i class="fas fa-chart-box"></i> 4. Yield Distribution by Crop (kg/ha)
+        </div>
+        <div class="card-body">
+            <div id="graph4"></div>
+        </div>
+    </div>
+    
+    <!-- Predictions -->
+    <div class="card shadow mb-4">
+        <div class="card-header bg-success text-white">
+            <i class="fas fa-robot"></i> 5. Production Predictions
+        </div>
+        <div class="card-body">
+            <div class="row">
+                {% for pred in predictions %}
+                <div class="col-md-3 mb-3">
+                    <div class="card border-success">
+                        <div class="card-header bg-success text-white text-center">
+                            <small>{{ pred.superficie }} hectare{% if pred.superficie > 1 %}s{% endif %}</small>
+                        </div>
+                        <div class="card-body text-center">
+                            <h4>{{ pred.production }} kg</h4>
+                            <p class="text-muted">Estimated production</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        Plotly.newPlot('graph1', {{ graph1|safe }}.data, {{ graph1|safe }}.layout);
+        Plotly.newPlot('graph2', {{ graph2|safe }}.data, {{ graph2|safe }}.layout);
+        Plotly.newPlot('graph3', {{ graph3|safe }}.data, {{ graph3|safe }}.layout);
+        Plotly.newPlot('graph4', {{ graph4|safe }}.data, {{ graph4|safe }}.layout);
+    </script>
+    
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center mb-4"><i class="fas fa-compare"></i> Comparaison entre agriculteurs</h2>
+    
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <form method="GET" class="row g-3">
+                <div class="col-md-5">
+                    <label class="form-label"><i class="fas fa-user"></i> Premier agriculteur</label>
+                    <select name="agri1" class="form-select">
+                        <option value="">Sélectionner</option>
+                        {% for a in agriculteurs %}
+                        <option value="{{ a }}" {% if a == agri1 %}selected{% endif %}>{{ a }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-5">
+                    <label class="form-label"><i class="fas fa-user"></i> Deuxième agriculteur</label>
+                    <select name="agri2" class="form-select">
+                        <option value="">Sélectionner</option>
+                        {% for a in agriculteurs %}
+                        <option value="{{ a }}" {% if a == agri2 %}selected{% endif %}>{{ a }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-success w-100">
+                        <i class="fas fa-chart-line"></i> Comparer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    {% if graph %}
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div id="comparison-graph"></div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card bg-success text-white">
+                <div class="card-header">
+                    <i class="fas fa-user-check"></i> {{ agri1 }}
+                </div>
+                <div class="card-body">
+                    <p><i class="fas fa-apple-alt"></i> Production: <strong>{{ "%.0f"|format(stats1.production) }} kg</strong></p>
+                    <p><i class="fas fa-money-bill"></i> Bénéfice: <strong>{{ "%.0f"|format(stats1.benefice) }} FCFA</strong></p>
+                    <p><i class="fas fa-tachometer-alt"></i> Nombre de collectes: <strong>{{ stats1.nb }}</strong></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card bg-primary text-white">
+                <div class="card-header">
+                    <i class="fas fa-user-check"></i> {{ agri2 }}
+                </div>
+                <div class="card-body">
+                    <p><i class="fas fa-apple-alt"></i> Production: <strong>{{ "%.0f"|format(stats2.production) }} kg</strong></p>
+                    <p><i class="fas fa-money-bill"></i> Bénéfice: <strong>{{ "%.0f"|format(stats2.benefice) }} FCFA</strong></p>
+                    <p><i class="fas fa-tachometer-alt"></i> Nombre de collectes: <strong>{{ stats2.nb }}</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="alert alert-info mt-3">
+        <i class="fas fa-lightbulb"></i> 
+        {% if stats1.benefice > stats2.benefice %}
+            <strong>{{ agri1 }}</strong> a un meilleur bénéfice que <strong>{{ agri2 }}</strong> !
+        {% elif stats2.benefice > stats1.benefice %}
+            <strong>{{ agri2 }}</strong> a un meilleur bénéfice que <strong>{{ agri1 }}</strong> !
+        {% else %}
+            Les deux agriculteurs ont des performances similaires.
+        {% endif %}
+    </div>
+    
+    <script>
+        Plotly.newPlot('comparison-graph', {{ graph|safe }}.data, {{ graph|safe }}.layout);
+    </script>
+    {% elif agri1 or agri2 %}
+    <div class="alert alert-warning text-center">
+        <i class="fas fa-exclamation-triangle"></i> Données insuffisantes pour comparer ces agriculteurs.
+    </div>
+    {% else %}
+    <div class="alert alert-info text-center">
+        <i class="fas fa-info-circle"></i> Sélectionnez deux agriculteurs pour comparer leurs performances.
+    </div>
+    {% endif %}
+</div>
+
+<style>
+    .comparison-graph { min-height: 400px; }
+</style>
+{% endblock %}

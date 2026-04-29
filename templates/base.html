@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AgriCollect Cameroon</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 16px; }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+        .navbar { background: linear-gradient(135deg, #1b5e20, #2e7d32, #4caf50); padding: 12px 0; }
+        .navbar-brand { color: white !important; font-weight: bold; font-size: 1.1rem; }
+        .nav-link { color: white !important; font-weight: 600; padding: 8px 14px !important; border-radius: 25px; transition: all 0.3s; }
+        .nav-link:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
+        .navbar-toggler { border-color: rgba(255,255,255,0.6); }
+        .navbar-toggler-icon { filter: invert(1); }
+        .dropdown-menu { background: #2e7d32; border: none; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .dropdown-item { color: white !important; padding: 10px 18px; transition: background 0.2s; border-radius: 8px; margin: 2px 4px; }
+        .dropdown-item:hover { background: #4caf50 !important; }
+        .card { border: none; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: transform 0.3s; margin-bottom: 20px; width: 100%; }
+        .card:hover { transform: translateY(-5px); }
+        .card-header { background: linear-gradient(135deg, #2e7d32, #4caf50); color: white; border-radius: 20px 20px 0 0 !important; font-weight: bold; padding: 15px 20px; }
+        .form-control, .form-select { border-radius: 12px; border: 2px solid #e0e0e0; padding: 12px 15px; width: 100%; font-size: 1rem; }
+        .form-control:focus, .form-select:focus { border-color: #4caf50; box-shadow: 0 0 0 0.2rem rgba(76,175,80,0.25); }
+        label { font-weight: 600; color: #2e7d32; margin-bottom: 8px; display: block; }
+        .btn-success-custom { background: #2e7d32; border: none; padding: 10px 25px; border-radius: 50px; font-weight: bold; color: white; }
+        .btn-success-custom:hover { background: #1b5e20; transform: translateY(-2px); }
+        .btn-floating { position: fixed; bottom: 20px; right: 20px; background: #2e7d32; color: white; border-radius: 50px; padding: 12px 18px; text-decoration: none; box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 1050; font-weight: 700; font-size: 0.9rem; transition: all 0.3s; }
+        .btn-floating:hover { transform: scale(1.1); color: white; background: #1b5e20; }
+        .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; }
+        .table { min-width: 600px; }
+        .table th, .table td { white-space: nowrap; padding: 12px 14px; vertical-align: middle; }
+        footer { background: #1a1a2e; color: white; padding: 30px 0; margin-top: 50px; }
+        footer a { color: #ccc !important; }
+        footer a:hover { color: #4caf50 !important; }
+        .alert { border-radius: 12px; }
+        .container { padding-left: 16px; padding-right: 16px; }
+        .js-plotly-plot, .plotly { width: 100% !important; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 991px) {
+            .navbar-collapse { background: #1b5e20; border-radius: 12px; padding: 10px; margin-top: 10px; }
+        }
+        @media (min-width: 768px) and (max-width: 991px) {
+            .hero-title { font-size: 2.2rem; }
+            .stat-number { font-size: 1.8rem; }
+            .section-title { font-size: 1.8rem; }
+            .feature-card { padding: 20px; }
+            .floating-card { width: 140px; padding: 15px; }
+        }
+        @media (max-width: 767px) {
+            html { font-size: 15px; }
+            .hero-title { font-size: 1.9rem; line-height: 1.2; }
+            .hero-subtitle { font-size: 0.95rem; }
+            .hero-image { display: none !important; }
+            .floating-card { display: none !important; }
+            .stat-number { font-size: 1.6rem; }
+            .section-title { font-size: 1.5rem; }
+            .btn-hero-primary, .btn-hero-secondary {
+                display: block; width: 100%; padding: 12px 20px;
+                font-size: 0.95rem; margin: 6px 0 !important; text-align: center;
+            }
+            .hero-buttons { display: flex; flex-direction: column; align-items: stretch; }
+            .cta-buttons { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+            .btn-cta-primary, .btn-cta-secondary { width: 100%; max-width: 280px; margin: 0 !important; }
+        }
+        @media (max-width: 575px) {
+            html { font-size: 14px; }
+            .hero-section { padding: 40px 0 30px; }
+            .hero-title { font-size: 1.75rem; }
+            .stat-card { padding: 16px; margin-bottom: 16px; }
+            .stat-icon { width: 55px; height: 55px; }
+            .stat-icon i { font-size: 1.5rem; }
+            .stat-number { font-size: 1.5rem; }
+            .stat-label { font-size: 0.85rem; }
+            .stat-trend { font-size: 0.78rem; }
+            .feature-card { padding: 18px; }
+            .feature-icon { width: 65px; height: 65px; }
+            .feature-icon i { font-size: 2rem; }
+            .activity-timeline::before { left: 20px; }
+            .activity-icon { width: 45px; height: 45px; margin-right: 12px; }
+            .activity-icon i { font-size: 1.1rem; }
+            footer .col-md-4 { margin-bottom: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="/"><i class="fas fa-tractor"></i> AgriCollect Cameroon</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/collecte"><i class="fas fa-database"></i> Collect</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/liste"><i class="fas fa-list"></i> Records</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><i class="fas fa-chart-line"></i> Analysis</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/analyse">📊 Descriptive</a></li>
+                            <li><a class="dropdown-item" href="/regression">📈 Regression</a></li>
+                            <li><a class="dropdown-item" href="/classification">🏷️ Classification</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/dashboard">📉 Dashboard</a></li>
+                            <li><a class="dropdown-item" href="/predict">🤖 Predictions</a></li>
+                            <li><a class="dropdown-item" href="/filtres">🔍 Filters</a></li>
+                            <li><a class="dropdown-item" href="/comparaison">🆚 Compare</a></li>
+                            <li><a class="dropdown-item" href="/recommandations">💡 Recommendations</a></li>
+                            <li><a class="dropdown-item" href="/visualisation">📊 Visualizations</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><i class="fas fa-exchange-alt"></i> Import/Export</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/import">📤 Import</a></li>
+                            <li><a class="dropdown-item" href="/export/csv">📥 Export CSV</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <a href="/collecte" class="btn-floating"><i class="fas fa-plus-circle"></i> New Record</a>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 text-center text-md-start mb-3">
+                    <h5><i class="fas fa-seedling"></i> AgriCollect Cameroon</h5>
+                    <p>Agricultural Data Collection & Analysis Platform</p>
+                    <p><small>© 2024 - Professional Edition v2.0</small></p>
+                </div>
+                <div class="col-md-4 text-center mb-3">
+                    <h6><i class="fas fa-graduation-cap"></i> Professional License</h6>
+                    <p class="mb-1"><strong>NGWANYA NORA SHEI</strong></p>
+                    <p class="mb-1">Matricule: <strong>24G2586</strong></p>
+                    <p>University of Yaoundé I (UY1)</p>
+                </div>
+                <div class="col-md-4 text-center text-md-end mb-3">
+                    <h6><i class="fas fa-info-circle"></i> Quick Links</h6>
+                    <a href="/license" class="text-white text-decoration-none d-block">📜 License Details</a>
+                    <a href="/about" class="text-white text-decoration-none d-block">ℹ️ About</a>
+                    <a href="/privacy" class="text-white text-decoration-none d-block">🔒 Privacy Policy</a>
+                </div>
+            </div>
+            <hr class="mt-3" style="background-color: rgba(255,255,255,0.2);">
+            <div class="text-center mt-3">
+                <small>
+                    <i class="fas fa-copyright"></i> 2024 AgriCollect Cameroon - Professional Edition<br>
+                    Licensed to: <strong>NGWANYA NORA SHEI (24G2586)</strong> - University of Yaoundé I<br>
+                    <i class="fas fa-chart-line"></i> INF232 EC2 - Data Analysis Project
+                </small>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Redimensionner les graphiques Plotly au resize
+        window.addEventListener('resize', function() {
+            var plots = document.querySelectorAll('.js-plotly-plot');
+            plots.forEach(function(plot) {
+                Plotly.Plots.resize(plot);
+            });
+        });
+    </script>
+</body>
+</html>

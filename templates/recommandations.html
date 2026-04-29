@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center mb-4"><i class="fas fa-lightbulb"></i> Smart Recommendations</h2>
+    
+    {% if not has_data %}
+    <div class="alert alert-warning text-center">
+        Not enough data. <a href="/collecte">Add more records</a>
+    </div>
+    {% else %}
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow mb-4">
+                <div class="card-header bg-success text-white">
+                    <i class="fas fa-trophy"></i> Top 3 Most Profitable Crops
+                </div>
+                <div class="card-body">
+                    {% for culture, benefice in recommendations.top_cultures.items() %}
+                    <div class="mb-3">
+                        <strong>{{ culture }}</strong>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" style="width: {{ (benefice / recommendations.top_cultures.values()|first * 100)|round }}%">
+                                {{ "%.0f"|format(benefice) }} FCFA
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card shadow mb-4">
+                <div class="card-header bg-info text-white">
+                    <i class="fas fa-tractor"></i> Best Farming Method
+                </div>
+                <div class="card-body text-center">
+                    <i class="fas fa-check-circle fa-4x text-success"></i>
+                    <h3 class="mt-2">{{ recommendations.best_method }}</h3>
+                    <p>This method generates the highest average profit</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card shadow">
+        <div class="card-header bg-warning text-white">
+            <i class="fas fa-map-marked-alt"></i> Best Crop by Region
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-success">
+                        <tr><th>Region</th><th>Recommended Crop</th><th>Average Profit (FCFA)</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for rec in recommendations.best_culture_by_region %}
+                        <tr>
+                            <td>{{ rec.region }}</td>
+                            <td><strong>{{ rec.culture }}</strong></td>
+                            <td>{{ "%.0f"|format(rec.benefice) }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    {% endif %}
+</div>
+{% endblock %}

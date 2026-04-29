@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center mb-4"><i class="fas fa-chart-line"></i> Visualisations avancées</h2>
+    
+    {% if not has_data %}
+    <div class="alert alert-warning text-center">
+        Aucune donnée disponible. <a href="/collecte">Ajoutez des données</a>
+    </div>
+    {% else %}
+    
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div id="graph1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div id="graph2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        Plotly.newPlot('graph1', {{ graph1|safe }}.data, {{ graph1|safe }}.layout);
+        Plotly.newPlot('graph2', {{ graph2|safe }}.data, {{ graph2|safe }}.layout);
+    </script>
+    
+    {% endif %}
+</div>
+{% endblock %}

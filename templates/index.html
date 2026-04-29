@@ -1,0 +1,627 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section avec animation -->
+<div class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-7">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span class="text-warning">🌾 AgriCollect</span> 
+                        <span class="text-white">Cameroon</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        La première plateforme intelligente de collecte et d'analyse 
+                        de données agricoles pour les petits exploitants camerounais
+                    </p>
+                    <div class="hero-buttons mt-4">
+                        <a href="/collecte" class="btn btn-hero-primary">
+                            <i class="fas fa-plus-circle"></i> Commencer la collecte
+                        </a>
+                        <a href="/analyse" class="btn btn-hero-secondary ms-3">
+                            <i class="fas fa-chart-line"></i> Voir les analyses
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="hero-image">
+                    <div class="floating-card">
+                        <i class="fas fa-tractor"></i>
+                        <p>Agriculture intelligente</p>
+                    </div>
+                    <div class="floating-card delay-1">
+                        <i class="fas fa-chart-line"></i>
+                        <p>Analyses en temps réel</p>
+                    </div>
+                    <div class="floating-card delay-2">
+                        <i class="fas fa-robot"></i>
+                        <p>Prédictions IA</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Section Statistiques -->
+<div class="container stats-container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <div class="stat-number">{{ stats.total_entries }}</div>
+                <div class="stat-label">Collectes enregistrées</div>
+                <div class="stat-trend">
+                    <i class="fas fa-chart-line"></i> +{{ stats.total_entries * 12 if stats.total_entries > 0 else 0 }}% ce mois
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-number">{{ stats.total_farmers }}</div>
+                <div class="stat-label">Agriculteurs actifs</div>
+                <div class="stat-trend">
+                    <i class="fas fa-users"></i> +{{ stats.total_farmers * 8 if stats.total_farmers > 0 else 0 }} nouveaux
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-apple-alt"></i>
+                </div>
+                <div class="stat-number">{{ stats.cultures_unique }}</div>
+                <div class="stat-label">Cultures suivies</div>
+                <div class="stat-trend">
+                    <i class="fas fa-tree"></i> Diversité agricole
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Satisfaction</div>
+                <div class="stat-trend">
+                    <i class="fas fa-star"></i> Agriculteurs satisfaits
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Section Fonctionnalités -->
+<div class="container features-section">
+    <h2 class="section-title">
+        <i class="fas fa-star-of-life"></i> Fonctionnalités avancées
+        <span class="title-underline"></span>
+    </h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-pie"></i>
+                </div>
+                <h4>Analyses descriptives</h4>
+                <p>Statistiques détaillées, graphiques interactifs et tendances de production</p>
+                <a href="/analyse" class="feature-link">Découvrir <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h4>Régression linéaire</h4>
+                <p>Modélisation des relations entre superficie, production et bénéfices</p>
+                <a href="/regression" class="feature-link">Découvrir <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h4>Prédictions IA</h4>
+                <p>Machine Learning pour prédire vos futures productions avec précision</p>
+                <a href="/predict" class="feature-link">Découvrir <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-filter"></i>
+                </div>
+                <h4>Filtres dynamiques</h4>
+                <p>Filtrez vos données par région, culture ou saison instantanément</p>
+                <a href="/filtres" class="feature-link">Découvrir <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h4>Recommandations</h4>
+                <p>Conseils personnalisés pour optimiser vos rendements</p>
+                <a href="/recommandations" class="feature-link">Découvrir <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-download"></i>
+                </div>
+                <h4>Import/Export</h4>
+                <p>Importez vos données CSV/Excel et exportez vos rapports</p>
+                <a href="/import" class="feature-link">Découvrir <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Section Dernières activités -->
+{% if dernieres %}
+<div class="container activities-section">
+    <h2 class="section-title">
+        <i class="fas fa-clock"></i> Dernières activités
+        <span class="title-underline"></span>
+    </h2>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="activity-timeline">
+                {% for d in dernieres %}
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-title">{{ d.nom_agriculteur }}</div>
+                        <div class="activity-desc">
+                            Culture: <strong>{{ d.culture }}</strong> | 
+                            Production: <strong>{{ d.quantite_produite_kg }} kg</strong> |
+                            Bénéfice: <strong>{{ d.benefice_total() }} FCFA</strong>
+                        </div>
+                        <div class="activity-date">
+                            <i class="fas fa-calendar"></i> {{ d.date_collecte.strftime('%d %B %Y à %H:%M') }}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Section Appel à l'action -->
+<div class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h3>Prêt à révolutionner votre agriculture ?</h3>
+            <p>Rejoignez des milliers d'agriculteurs camerounais qui utilisent AgriCollect</p>
+            <div class="cta-buttons">
+                <a href="/collecte" class="btn btn-cta-primary">
+                    <i class="fas fa-plus-circle"></i> Commencer maintenant
+                </a>
+                <a href="/dashboard" class="btn btn-cta-secondary">
+                    <i class="fas fa-chalkboard"></i> Explorer le dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Hero Section améliorée */
+    .hero-section {
+        background: linear-gradient(135deg, #0b2e13 0%, #1b5e20 30%, #2e7d32 60%, #4caf50 100%);
+        padding: 80px 0;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.05)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+        background-size: cover;
+        opacity: 0.3;
+    }
+    
+    .hero-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+        animation: fadeInUp 0.8s ease-out;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.2rem;
+        opacity: 0.95;
+        margin-bottom: 30px;
+        animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+    
+    .btn-hero-primary {
+        background: linear-gradient(135deg, #ffd700, #ffed4a);
+        color: #1b5e20;
+        padding: 14px 35px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        border: none;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    
+    .btn-hero-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(255,215,0,0.4);
+        color: #0b2e13;
+    }
+    
+    .btn-hero-secondary {
+        background: rgba(255,255,255,0.2);
+        backdrop-filter: blur(10px);
+        color: white;
+        padding: 14px 35px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        border: 2px solid rgba(255,255,255,0.5);
+    }
+    
+    .btn-hero-secondary:hover {
+        background: rgba(255,255,255,0.3);
+        transform: translateY(-3px);
+        color: white;
+    }
+    
+    .hero-image {
+        position: relative;
+        height: 300px;
+    }
+    
+    .floating-card {
+        position: absolute;
+        background: rgba(255,255,255,0.15);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 20px;
+        text-align: center;
+        width: 180px;
+        animation: float 6s ease-in-out infinite;
+    }
+    
+    .floating-card:nth-child(1) {
+        top: 0;
+        left: 0;
+        animation-delay: 0s;
+    }
+    
+    .floating-card:nth-child(2) {
+        top: 50px;
+        right: 0;
+        animation-delay: 2s;
+    }
+    
+    .floating-card:nth-child(3) {
+        bottom: 0;
+        left: 40px;
+        animation-delay: 4s;
+    }
+    
+    .floating-card i {
+        font-size: 3rem;
+        margin-bottom: 10px;
+    }
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+    }
+    
+    /* Cartes statistiques */
+    .stat-card {
+        background: white;
+        border-radius: 20px;
+        padding: 25px;
+        text-align: center;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        margin-bottom: 30px;
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 30px 50px rgba(0,0,0,0.15);
+    }
+    
+    .stat-icon {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, #2e7d32, #4caf50);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+    }
+    
+    .stat-icon i {
+        font-size: 2rem;
+        color: white;
+    }
+    
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #1b5e20;
+        margin-bottom: 10px;
+    }
+    
+    .stat-label {
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 15px;
+    }
+    
+    .stat-trend {
+        font-size: 0.85rem;
+        color: #4caf50;
+        font-weight: 600;
+    }
+    
+    /* Section Fonctionnalités */
+    .features-section {
+        padding: 60px 0;
+        background: #f8f9fa;
+    }
+    
+    .section-title {
+        text-align: center;
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #1b5e20;
+        margin-bottom: 50px;
+        position: relative;
+    }
+    
+    .title-underline {
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, #2e7d32, #4caf50);
+        margin: 15px auto 0;
+        border-radius: 2px;
+    }
+    
+    .feature-card {
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        text-align: center;
+        margin-bottom: 30px;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    }
+    
+    .feature-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+    }
+    
+    .feature-icon i {
+        font-size: 2.5rem;
+        color: #2e7d32;
+    }
+    
+    .feature-card h4 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: #1b5e20;
+    }
+    
+    .feature-card p {
+        color: #666;
+        margin-bottom: 20px;
+    }
+    
+    .feature-link {
+        color: #2e7d32;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s;
+    }
+    
+    .feature-link:hover {
+        color: #1b5e20;
+        margin-left: 5px;
+    }
+    
+    /* Timeline activités */
+    .activities-section {
+        padding: 60px 0;
+    }
+    
+    .activity-timeline {
+        position: relative;
+    }
+    
+    .activity-timeline::before {
+        content: '';
+        position: absolute;
+        left: 30px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(180deg, #2e7d32, #4caf50, #c8e6c9);
+    }
+    
+    .activity-item {
+        display: flex;
+        margin-bottom: 25px;
+        position: relative;
+    }
+    
+    .activity-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #2e7d32, #4caf50);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 20px;
+        z-index: 1;
+    }
+    
+    .activity-icon i {
+        font-size: 1.5rem;
+        color: white;
+    }
+    
+    .activity-content {
+        flex: 1;
+        background: white;
+        padding: 15px 20px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+    
+    .activity-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #1b5e20;
+        margin-bottom: 8px;
+    }
+    
+    .activity-desc {
+        font-size: 0.9rem;
+        color: #666;
+        margin-bottom: 8px;
+    }
+    
+    .activity-date {
+        font-size: 0.8rem;
+        color: #999;
+    }
+    
+    /* CTA Section */
+    .cta-section {
+        background: linear-gradient(135deg, #1b5e20, #2e7d32);
+        padding: 60px 0;
+        margin-top: 30px;
+    }
+    
+    .cta-content {
+        text-align: center;
+        color: white;
+    }
+    
+    .cta-content h3 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+    
+    .cta-content p {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+        opacity: 0.95;
+    }
+    
+    .btn-cta-primary {
+        background: #ffd700;
+        color: #1b5e20;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 700;
+        margin: 0 10px;
+        transition: all 0.3s;
+    }
+    
+    .btn-cta-primary:hover {
+        background: #ffed4a;
+        transform: translateY(-2px);
+        color: #0b2e13;
+    }
+    
+    .btn-cta-secondary {
+        background: rgba(255,255,255,0.2);
+        color: white;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 700;
+        margin: 0 10px;
+        transition: all 0.3s;
+        border: 2px solid rgba(255,255,255,0.5);
+    }
+    
+    .btn-cta-secondary:hover {
+        background: rgba(255,255,255,0.3);
+        transform: translateY(-2px);
+        color: white;
+    }
+    
+    @media (max-width: 768px) {
+        .hero-title { font-size: 2rem; }
+        .hero-subtitle { font-size: 1rem; }
+        .stat-number { font-size: 1.8rem; }
+        .section-title { font-size: 1.5rem; }
+        .btn-hero-primary, .btn-hero-secondary { padding: 10px 20px; font-size: 0.9rem; }
+        .floating-card { display: none; }
+    }
+</style>
+
+<script>
+    // Animation au scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+    
+    document.querySelectorAll('.stat-card, .feature-card, .activity-item').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'all 0.6s ease-out';
+        observer.observe(el);
+    });
+</script>
+{% endblock %}

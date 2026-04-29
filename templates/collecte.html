@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h4><i class="fas fa-edit"></i> Formulaire de collecte de données agricoles</h4>
+                </div>
+                <div class="card-body">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    
+                    <form method="POST">
+                        {{ form.hidden_tag() }}
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                {{ form.nom_agriculteur.label }}
+                                {{ form.nom_agriculteur(class="form-control", placeholder="Ex: Jean Mbarga") }}
+                                {% if form.nom_agriculteur.errors %}
+                                    <div class="text-danger">{{ form.nom_agriculteur.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                {{ form.region.label }}
+                                {{ form.region(class="form-select") }}
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                {{ form.culture.label }}
+                                {{ form.culture(class="form-select") }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                {{ form.superficie_hectares.label }}
+                                {{ form.superficie_hectares(class="form-control", placeholder="Ex: 2.5", step="0.01") }}
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                {{ form.quantite_produite_kg.label }}
+                                {{ form.quantite_produite_kg(class="form-control", placeholder="Ex: 3000", step="0.01") }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                {{ form.prix_vente_kg.label }}
+                                {{ form.prix_vente_kg(class="form-control", placeholder="Ex: 350", step="0.01") }}
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                {{ form.depenses_total.label }}
+                                {{ form.depenses_total(class="form-control", placeholder="Ex: 500000", step="0.01") }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                {{ form.saison.label }}
+                                {{ form.saison(class="form-select") }}
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                {{ form.methode_culture.label }}
+                                {{ form.methode_culture(class="form-select") }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                {{ form.email.label }}
+                                {{ form.email(class="form-control", placeholder="exemple@email.com") }}
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            {{ form.notes.label }}
+                            {{ form.notes(class="form-control", rows="3", placeholder="Informations complémentaires...") }}
+                        </div>
+                        
+                        {{ form.submit(class="btn btn-success w-100 py-2") }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-control:focus, .form-select:focus {
+        border-color: #4caf50;
+        box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+    }
+    label {
+        font-weight: 600;
+        color: #2e7d32;
+        margin-bottom: 8px;
+    }
+</style>
+{% endblock %}

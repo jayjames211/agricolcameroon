@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center mb-4"><i class="fas fa-robot"></i> Prédiction de production (IA)</h2>
+    
+    {% if not has_data %}
+    <div class="alert alert-warning text-center">
+        <i class="fas fa-exclamation-triangle"></i> {{ error }}
+        <br><a href="/collecte" class="btn btn-primary mt-3">Ajouter des données</a>
+    </div>
+    {% else %}
+    
+    <div class="alert alert-info text-center">
+        <i class="fas fa-chart-line"></i> Modèle Random Forest entraîné sur <strong>{{ predictions|length }}</strong> scénarios<br>
+        Précision du modèle (R²): <strong>{{ "%.2f"|format(r2) }}</strong>
+    </div>
+    
+    <div class="row">
+        {% for pred in predictions %}
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 shadow">
+                <div class="card-header bg-success text-white text-center">
+                    <i class="fas fa-tractor"></i> {{ pred.label }}
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-ruler"></i> Surface: {{ pred.superficie }} ha</li>
+                        <li><i class="fas fa-money-bill"></i> Investissement: {{ "%.0f"|format(pred.depenses) }} FCFA</li>
+                        <li class="mt-3"><strong><i class="fas fa-apple-alt"></i> Production prédite:</strong></li>
+                        <li class="text-success fs-4">{{ "%.0f"|format(pred.production) }} kg</li>
+                        <li><strong><i class="fas fa-chart-line"></i> Bénéfice estimé:</strong></li>
+                        <li class="text-primary fs-5">{{ "%.0f"|format(pred.benefice) }} FCFA</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="card mt-4">
+        <div class="card-body bg-light">
+            <h5><i class="fas fa-lightbulb"></i> Conseils pour améliorer vos prédictions:</h5>
+            <ul>
+                <li>Plus vous enregistrez de données, plus les prédictions sont précises</li>
+                <li>Ajoutez des informations sur la météo et la qualité du sol</li>
+                <li>Comparez vos résultats avec les moyennes régionales</li>
+            </ul>
+        </div>
+    </div>
+    
+    {% endif %}
+</div>
+{% endblock %}

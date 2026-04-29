@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 mx-auto">
+            <div class="card shadow mb-4">
+                <div class="card-header bg-success text-white text-center">
+                    <h2><i class="fas fa-certificate"></i> Professional License Certificate</h2>
+                </div>
+                <div class="card-body text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-tractor fa-4x text-success"></i>
+                        <i class="fas fa-plus fa-2x"></i>
+                        <i class="fas fa-chart-line fa-4x text-primary"></i>
+                    </div>
+                    <h1 class="display-5 text-success">AgriCollect Cameroon</h1>
+                    <p class="lead">Professional Edition - Data Analysis Platform</p>
+                    <hr>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h4><i class="fas fa-user-graduate"></i> Licensee Information</h4>
+                                    <p><strong>Name:</strong> {{ license.licensee }}</p>
+                                    <p><strong>Matricule:</strong> {{ license.matricule }}</p>
+                                    <p><strong>University:</strong> {{ license.university }}</p>
+                                    <p><strong>Faculty:</strong> {{ license.faculty }}</p>
+                                    <p><strong>Department:</strong> {{ license.department }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h4><i class="fas fa-info-circle"></i> License Details</h4>
+                                    <p><strong>Course:</strong> {{ license.course }}</p>
+                                    <p><strong>Project:</strong> {{ license.project }}</p>
+                                    <p><strong>License Type:</strong> {{ license.license_type }}</p>
+                                    <p><strong>Version:</strong> {{ license.version }}</p>
+                                    <p><strong>Year:</strong> {{ license.year }}</p>
+                                    <p><strong>Validity:</strong> {{ license.expiry }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h4><i class="fas fa-star"></i> Licensed Features</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for feature in license.features %}
+                        <div class="col-md-6 mb-2">
+                            <i class="fas fa-check-circle text-success"></i> {{ feature }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow mb-4">
+                <div class="card-header bg-warning text-dark">
+                    <h4><i class="fas fa-gavel"></i> Academic Honesty Declaration</h4>
+                </div>
+                <div class="card-body">
+                    <p>I, <strong>{{ license.licensee }}</strong> (Matricule: <strong>{{ license.matricule }}</strong>), hereby declare that:</p>
+                    <ul>
+                        <li>This application is an original work developed for the INF232 EC2 course at the University of Yaoundé I.</li>
+                        <li>All data collected and analyzed is for academic purposes only.</li>
+                        <li>The application complies with data protection and privacy regulations.</li>
+                        <li>This work is submitted in partial fulfillment of the course requirements.</li>
+                    </ul>
+                    <div class="text-center mt-4">
+                        <p>Date: December 2024</p>
+                        <p><strong>Signature: NGWANYA NORA SHEI</strong></p>
+                        <div class="border-top pt-2">
+                            <small>Electronic License - Valid without signature</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mb-5">
+                <a href="/" class="btn btn-success btn-lg">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

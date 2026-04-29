@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <h2 class="text-center mb-4"><i class="fas fa-upload"></i> Importation massive de données</h2>
+            
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <i class="fas fa-file-excel"></i> Importer un fichier Excel/CSV
+                </div>
+                <div class="card-body">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }}">{{ message }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    
+                    <div class="alert alert-info">
+                        <h5><i class="fas fa-info-circle"></i> Format du fichier attendu:</h5>
+                        <p>Colonnes acceptées: <strong>nom_agriculteur, region, culture, superficie_hectares, quantite_produite_kg, prix_vente_kg, depenses_total, saison, methode_culture</strong></p>
+                        <p>Exemple de ligne: <code>Jean Dupont,Centre,Maïs,2.5,3000,350,500000,Grande saison,Moderne</code></p>
+                    </div>
+                    
+                    <form method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label class="form-label"><i class="fas fa-file"></i> Fichier (CSV ou Excel)</label>
+                            <input type="file" name="file" class="form-control" accept=".csv,.xlsx,.xls" required>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">
+                            <i class="fas fa-upload"></i> Importer
+                        </button>
+                    </form>
+                    
+                    <hr>
+                    
+                    <div class="text-center">
+                        <a href="/static/template_import.csv" class="btn btn-outline-primary">
+                            <i class="fas fa-download"></i> Télécharger le modèle
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card shadow mt-4">
+                <div class="card-header bg-info text-white">
+                    <i class="fas fa-tips"></i> Conseils
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li>Le fichier doit être encodé en UTF-8</li>
+                        <li>Les nombres doivent utiliser le point (.) comme séparateur décimal</li>
+                        <li>Les dates doivent être au format YYYY-MM-DD</li>
+                        <li>Les champs optionnels peuvent être laissés vides</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

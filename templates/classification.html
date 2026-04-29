@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center mb-4"><i class="fas fa-chart-pie"></i> Classification non-supervisée (K-Means)</h2>
+    
+    {% if not has_data %}
+    <div class="alert alert-warning text-center">
+        {{ error or "Aucune donnée disponible. Minimum 10 collectes requises." }}
+    </div>
+    {% else %}
+    
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div id="graph1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5>Interprétation des clusters ({{ n_clusters }} groupes)</h5>
+                    <p>Chaque couleur représente un type d'exploitation agricole différent.</p>
+                    <ul>
+                        <li>Cluster 0: Exploitations à petite échelle</li>
+                        <li>Cluster 1: Exploitations moyennes</li>
+                        <li>Cluster 2: Grandes exploitations</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        Plotly.newPlot('graph1', {{ graph1|safe }}.data, {{ graph1|safe }}.layout);
+    </script>
+    
+    {% endif %}
+</div>
+{% endblock %}

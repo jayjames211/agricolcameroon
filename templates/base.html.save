@@ -1,0 +1,576 @@
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
+            }
+        }
+        
+        /* Navbar stylisée */
+        .navbar {
+            background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 30%, #4caf50 100%);
+            padding: 15px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            animation: fadeInDown 0.6s ease-out;
+        }
+        
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white !important;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand:hover {
+            transform: scale(1.05);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .navbar-brand i {
+            margin-right: 10px;
+            animation: pulse 2s infinite;
+        }
+        
+        .nav-link {
+            color: white !important;
+            font-weight: 500;
+            margin: 0 5px;
+            padding: 8px 15px !important;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .nav-link i {
+            margin-right: 8px;
+        }
+        
+        .dropdown-menu {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            margin-top: 10px;
+        }
+        
+        .dropdown-item {
+            color: white !important;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown-item:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
+        }
+        
+        .dropdown-item i {
+            margin-right: 10px;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #1b5e20 0%, #43a047 50%, #66bb6a 100%);
+            color: white;
+            padding: 80px 0;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            opacity: 0.3;
+        }
+        
+        .hero-section h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            animation: slideInLeft 0.8s ease-out;
+        }
+        
+        .hero-section .lead {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+        
+        /* Cartes stats */
+        .card-stats {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 30px 20px;
+            margin: 15px 0;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .card-stats:nth-child(2) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            animation-delay: 0.2s;
+        }
+        
+        .card-stats:nth-child(3) {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            animation-delay: 0.4s;
+        }
+        
+        .card-stats:nth-child(4) {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            animation-delay: 0.6s;
+        }
+        
+        .card-stats:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card-stats i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            animation: pulse 2s infinite;
+        }
+        
+        .card-stats h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+        
+        .card-stats p {
+            font-size: 1rem;
+            margin: 0;
+            opacity: 0.9;
+        }
+        
+        /* Cartes normales */
+        .card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            background: white;
+            overflow: hidden;
+            animation: fadeInUp 0.7s ease-out;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+            color: white;
+            font-weight: 600;
+            border: none;
+            padding: 15px 20px;
+        }
+        
+        .card-header i {
+            margin-right: 10px;
+        }
+        
+        /* Boutons */
+        .btn-success-custom {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            color: white;
+        }
+        
+        .btn-success-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(76, 175, 80, 0.4);
+            color: white;
+        }
+        
+        .btn-outline-custom {
+            border: 2px solid #4caf50;
+            color: #4caf50;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-custom:hover {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Bouton flottant */
+        .btn-floating {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+            color: white;
+            border-radius: 60px;
+            padding: 15px 25px;
+            font-weight: 700;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: glow 2s infinite;
+        }
+        
+        .btn-floating:hover {
+            transform: scale(1.1);
+            color: white;
+            box-shadow: 0 8px 30px rgba(76, 175, 80, 0.5);
+        }
+        
+        .btn-floating i {
+            font-size: 1.3rem;
+        }
+        
+        /* Formulaires */
+        .form-control, .form-select {
+            border-radius: 12px;
+            border: 2px solid #e0e0e0;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: #4caf50;
+            box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+            transform: translateY(-2px);
+        }
+        
+        label {
+            font-weight: 600;
+            color: #2e7d32;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        /* Tableaux */
+        .table {
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .table thead {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+            color: white;
+        }
+        
+        .table tbody tr {
+            transition: all 0.3s ease;
+        }
+        
+        .table tbody tr:hover {
+            background-color: #f5f5f5;
+            transform: scale(1.01);
+        }
+        
+        /* Alertes */
+        .alert {
+            border-radius: 15px;
+            border: none;
+            padding: 15px 20px;
+            animation: fadeInUp 0.5s ease-out;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: white;
+            padding: 40px 0;
+            margin-top: 60px;
+            position: relative;
+        }
+        
+        footer p {
+            margin: 0;
+            opacity: 0.9;
+        }
+        
+        footer i {
+            margin: 0 5px;
+            animation: pulse 2s infinite;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            
+            .card-stats h3 {
+                font-size: 1.8rem;
+            }
+            
+            .btn-floating {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+            
+            .btn-floating span {
+                display: none;
+            }
+        }
+        
+        /* Scrollbar personnalisée */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1b5e20;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-tractor"></i> AgriCollect Cameroon
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <!-- Menu principal -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            <i class="fas fa-home"></i> Accueil
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/collecte">
+                            <i class="fas fa-database"></i> Collecte
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/liste">
+                            <i class="fas fa-list"></i> Liste
+                        </a>
+                    </li>
+                    
+                    <!-- Menu déroulant Analyse -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-chart-line"></i> Analyses
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="/analyse">
+                                    <i class="fas fa-chart-bar"></i> Analyse descriptive
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/regression">
+                                    <i class="fas fa-chart-line"></i> Régression linéaire
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/classification">
+                                    <i class="fas fa-chart-pie"></i> Classification K-Means
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item" href="/dashboard">
+                                    <i class="fas fa-chalkboard"></i> Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/predict">
+                                    <i class="fas fa-robot"></i> Prédiction IA
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/filtres">
+                                    <i class="fas fa-filter"></i> Filtres dynamiques
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/comparaison">
+                                    <i class="fas fa-compare"></i> Comparaison
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/recommandations">
+                                    <i class="fas fa-lightbulb"></i> Recommandations
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Menu Import/Export -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-exchange-alt"></i> Import/Export
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="/import">
+                                    <i class="fas fa-upload"></i> Importer (Excel/CSV)
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/export/csv">
+                                    <i class="fas fa-file-csv"></i> Exporter CSV
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/export/excel">
+                                    <i class="fas fa-file-excel"></i> Exporter Excel
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenu principal -->
+    {% block content %}{% endblock %}
+
+    <!-- Bouton flottant pour ajout rapide -->
+    <a href="/collecte" class="btn-floating">
+        <i class="fas fa-plus-circle"></i>
+        <span>Nouvelle collecte</span>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 text-center text-md-start">
+                    <h5><i class="fas fa-seedling"></i> AgriCollect Cameroon</h5>
+                    <p>Collecte de données agricoles pour les petits exploitants</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <i class="fas fa-map-marker-alt"></i> Cameroun<br>
+                    <i class="fas fa-envelope"></i> contact@agricolect.cm<br>
+                    <i class="fas fa-phone"></i> +237 6XX XXX XXX
+                </div>
+                <div class="col-md-4 text-center text-md-end">
+                    <p>© 2024 - INF232 EC2</p>
+                    <p>Analyse de données agricoles</p>
+                </div>
+            </div>
+            <hr class="mt-3" style="background-color: rgba(255,255,255,0.2);">
+            <div class="text-center mt-3">
+                <small>🌱 Ensemble pour une agriculture intelligente et durable au Cameroun 🌱</small>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    
+    <!-- Script pour les tooltips Bootstrap -->
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+    
+    <!-- Script pour animation au scroll -->
+    <script>
+        window.addEventListener('scroll', function() {
+            var cards = document.querySelectorAll('.card, .card-stats');
+            cards.forEach(function(card) {
+                var position = card.getBoundingClientRect().top;
+                var screenPosition = window.innerHeight / 1.3;
+                if(position < screenPosition) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
